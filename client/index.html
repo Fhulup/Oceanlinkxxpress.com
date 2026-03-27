@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Oceanlinkxxpress Tracking</title>
+  <style>
+    body { background: black; color: gold; text-align: center; }
+    input, button { padding: 10px; margin: 10px; }
+    button { background: gold; color: black; }
+  </style>
+</head>
+<body>
+
+<h1>Track Shipment</h1>
+
+<input id="trackId" placeholder="Enter Tracking ID">
+<button onclick="track()">Track</button>
+
+<div id="result"></div>
+
+<script>
+function track() {
+  const id = document.getElementById("trackId").value;
+
+  fetch("https://YOUR-BACKEND-URL/track/" + id)
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById("result").innerHTML =
+        "Status: " + data.status;
+    });
+}
+</script>
+
+</body>
+</html>
