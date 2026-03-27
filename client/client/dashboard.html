@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <style>
+    body { background: black; color: gold; text-align: center; }
+    input, button { padding: 10px; margin: 10px; }
+    button { background: gold; color: black; }
+  </style>
+</head>
+<body>
+
+<h1>Oceanlinkxxpress Dashboard</h1>
+
+<h3>Create Shipment</h3>
+<input id="name" placeholder="Receiver Name"><br>
+<input id="location" placeholder="Location"><br>
+<button onclick="create()">Create Shipment</button>
+
+<h3>Update Shipment</h3>
+<input id="id" placeholder="Tracking ID"><br>
+<input id="status" placeholder="Status (e.g. In Transit)"><br>
+<input id="loc" placeholder="Location"><br>
+<button onclick="update()">Update Status</button>
+
+<script>
+function create() {
+  fetch("https://YOUR-BACKEND-URL/create-shipment", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      name: document.getElementById("name").value,
+      location: document.getElementById("location").value
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    alert("Tracking ID: " + data.id);
+  });
+}
+
+function update() {
+  const id = document.getElementById("id").value;
+
+  fetch("https://YOUR-BACKEND-URL/update-status/" + id, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      status: document.getElementById("status").value,
+      location: document.getElementById("loc").value
+    })
+  })
+  .then(() => {
+    alert("Updated successfully");
+  });
+}
+</script>
+
+</body>
+</html>
