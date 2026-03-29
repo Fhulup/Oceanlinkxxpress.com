@@ -1,0 +1,9 @@
+{
+  "shipments": [
+    {
+      "id": "ABC12345",
+      "status": "In Transit",
+      "location": "Accra"
+    }
+  ]
+}
