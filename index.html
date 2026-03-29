@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Oceanlinkxxpress Tracking</title>
+  <style>
+    body {
+      background: black;
+      color: gold;
+      text-align: center;
+      font-family: Arial;
+    }
+
+    input, button {
+      padding: 12px;
+      margin: 10px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    button {
+      background: gold;
+      color: black;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>Oceanlinkxxpress</h1>
+<h3>Track Your Shipment</h3>
+
+<input id="trackId" placeholder="Enter Tracking ID">
+<button onclick="track()">Track</button>
+
+<div id="result"></div>
+
+<script>
+function track() {
+  const id = document.getElementById("trackId").value;
+
+  fetch("https://raw.githubusercontent.com/YOUR-USERNAME/oceanlinkxxpress/main/data.json")
+    .then(res => res.json())
+    .then(data => {
+      const shipment = data.shipments.find(s => s.id === id);
+
+      if (shipment) {
+        document.getElementById("result").innerHTML =
+          "<h3>Status: " + shipment.status + "</h3>" +
+          "<p>Location: " + shipment.location + "</p>";
+      } else {
+        document.getElementById("result").innerHTML =
+          "<p>Tracking ID not found</p>";
+      }
+    });
+}
+</script>
+
+</body>
+</html>
